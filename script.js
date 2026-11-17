@@ -37,7 +37,7 @@
 
   // -------------------------------------------------------------------------
   // 2. COUNTDOWN TIMER
-  // Target: 28 days, 14 hours, 42 minutes, 18 seconds from first visit or fixed future date
+  // Target: 90 days countdown
   // -------------------------------------------------------------------------
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
@@ -46,14 +46,14 @@
   const bannerDaysLeft = document.getElementById('banner-days-left');
 
   let launchTarget;
-  const storedTarget = localStorage.getItem('suitecell_launch_target');
+  const storedTarget = localStorage.getItem('suitecell_launch_target_90d');
 
   if (storedTarget) {
     launchTarget = parseInt(storedTarget, 10);
   } else {
-    // 28 days in future
-    launchTarget = Date.now() + (28 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000);
-    localStorage.setItem('suitecell_launch_target', launchTarget.toString());
+    // 90 days target
+    launchTarget = Date.now() + (90 * 24 * 60 * 60 * 1000) + (13 * 60 * 60 * 1000) + (59 * 60 * 1000);
+    localStorage.setItem('suitecell_launch_target_90d', launchTarget.toString());
   }
 
   function updateCountdown() {
