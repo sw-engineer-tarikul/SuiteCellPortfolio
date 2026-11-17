@@ -444,9 +444,13 @@
           <div class="m-panel">
             <div class="m-panel-header">
               <span class="m-panel-title">${data.tableTitle}</span>
-              <span style="font-size: 0.75rem; color: var(--text-subtle); font-family: var(--font-mono);">Live Updates</span>
+              <span class="m-panel-tag">Live Stream</span>
             </div>
-            <div style="overflow-x: auto;">
+            <div class="m-table-container">
+              <div class="mobile-table-hint">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+                <span>Swipe left/right to view all 5 metrics</span>
+              </div>
               <table class="m-table">
                 <thead>
                   <tr>
