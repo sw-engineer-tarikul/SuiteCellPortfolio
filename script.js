@@ -35,6 +35,30 @@
     themeToggleBtn.addEventListener('click', toggleTheme);
   }
 
+  // Mobile Navigation Drawer Toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+      if (isExpanded) {
+        mobileMenu.setAttribute('hidden', '');
+      } else {
+        mobileMenu.removeAttribute('hidden');
+      }
+    });
+
+    const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav-item, .mobile-menu-cta');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('hidden', '');
+      });
+    });
+  }
+
   // -------------------------------------------------------------------------
   // 2. COUNTDOWN TIMER
   // Target: 90 days countdown
