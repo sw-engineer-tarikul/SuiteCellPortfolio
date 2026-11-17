@@ -1122,6 +1122,12 @@ button {
   color: var(--text-subtle);
 }
 
+.preview-wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* Mockup Frame */
 .mockup-frame {
   background: var(--mockup-bg);
@@ -1129,6 +1135,9 @@ button {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg), 0 0 80px -20px rgba(99, 102, 241, 0.25);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .mockup-bar {
@@ -1138,6 +1147,8 @@ button {
   padding: 14px 20px;
   background: var(--mockup-header);
   border-bottom: 1px solid var(--border-subtle);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .window-controls {
@@ -1175,6 +1186,7 @@ button {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .live-indicator {
@@ -1188,13 +1200,18 @@ button {
 .mockup-body {
   padding: 28px;
   min-height: 480px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Interior Mockup Components */
 .mockup-dashboard {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .mockup-top-stats {
@@ -1244,6 +1261,9 @@ button {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .m-panel {
@@ -1254,12 +1274,19 @@ button {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .m-panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
 }
 
 .m-panel-title {
@@ -1267,6 +1294,8 @@ button {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-main);
+  min-width: 0;
+  word-break: break-word;
 }
 
 .m-badge {
@@ -1274,6 +1303,7 @@ button {
   padding: 2px 8px;
   border-radius: var(--radius-full);
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .m-badge.live {
@@ -1281,7 +1311,19 @@ button {
   color: var(--brand-accent);
 }
 
-/* Mockup Data Rows */
+/* Desktop Table View */
+.desktop-table-view {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile Native Card View (Default hidden on desktop) */
+.mobile-records-view {
+  display: none;
+}
+
 .m-table {
   width: 100%;
   border-collapse: collapse;
@@ -1294,6 +1336,7 @@ button {
   color: var(--text-subtle);
   font-weight: 600;
   border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
 }
 
 .m-table td {
@@ -1312,6 +1355,7 @@ button {
   gap: 8px;
   color: var(--text-main);
   font-weight: 600;
+  min-width: 0;
 }
 
 .m-avatar-mini {
@@ -1324,6 +1368,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 /* AI Autonomous Activity Feed */
@@ -1331,16 +1376,21 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  min-width: 0;
 }
 
 .agent-item {
   display: flex;
   gap: 12px;
-  padding: 10px;
+  padding: 12px;
   background: var(--bg-surface-elevated);
   border-radius: var(--radius-xs);
   border: 1px solid var(--border-subtle);
   font-size: 0.8rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .agent-avatar {
@@ -1353,16 +1403,36 @@ button {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-weight: 700;
+  font-size: 0.72rem;
 }
 
 .agent-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
+  flex: 1 1 0%;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .agent-name {
   font-weight: 700;
+  color: var(--text-main);
+}
+
+.agent-desc {
+  color: var(--text-muted);
+  line-height: 1.45;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.agent-time {
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+}
   color: var(--text-main);
 }
 
@@ -2660,6 +2730,9 @@ button {
   .m-panel {
     padding: 14px 12px;
     gap: 12px;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .m-panel-tag {
@@ -2668,30 +2741,91 @@ button {
     font-family: var(--font-mono);
   }
 
-  .m-table-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: var(--radius-xs);
+  /* Hide Desktop Table on Mobile */
+  .desktop-table-view {
+    display: none !important;
   }
 
-  .mobile-table-hint {
+  /* Show Zero-Cropping Mobile Cards View */
+  .mobile-records-view {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .m-record-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xs);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .m-record-top {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .m-record-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+    word-break: break-word;
+  }
+
+  .m-record-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 6px;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 6px;
     font-size: 0.72rem;
-    color: var(--brand-secondary);
-    margin-bottom: 8px;
-    font-weight: 500;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
-  .m-table {
-    min-width: 520px;
-    font-size: 0.78rem;
+  .m-record-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
   }
 
-  .m-table td, .m-table th {
-    padding: 8px 8px;
+  .m-record-col.val-col {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .m-record-meta-lbl {
+    font-size: 0.62rem;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .m-record-meta-val {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    word-break: break-word;
+  }
+
+  .m-record-meta-val.highlight {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--brand-accent);
   }
 
   /* Comparison Section */

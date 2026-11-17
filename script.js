@@ -415,12 +415,38 @@
       </tr>
     `).join('');
 
+    let mobileCardsHtml = data.tableRows.map(r => `
+      <div class="m-record-card">
+        <div class="m-record-top">
+          <div class="m-user-cell">
+            <span class="m-avatar-mini">${r.col1.charAt(0)}</span>
+            <span class="m-record-name">${r.col1}</span>
+          </div>
+          <span class="m-badge live">${r.health}</span>
+        </div>
+        <div class="m-record-grid">
+          <div class="m-record-col">
+            <span class="m-record-meta-lbl">Owner</span>
+            <span class="m-record-meta-val">${r.user}</span>
+          </div>
+          <div class="m-record-col">
+            <span class="m-record-meta-lbl">Stage</span>
+            <span class="m-record-meta-val">${r.stage}</span>
+          </div>
+          <div class="m-record-col val-col">
+            <span class="m-record-meta-lbl">Value</span>
+            <span class="m-record-meta-val highlight">${r.val}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
     let aiLogsHtml = data.aiLogs.map(a => `
       <div class="agent-item">
         <div class="agent-avatar">AI</div>
         <div class="agent-text">
           <span class="agent-name">${a.name}</span>
-          <span class="agent-desc" style="color: var(--text-muted);">${a.text}</span>
+          <span class="agent-desc">${a.text}</span>
           <span class="agent-time">${a.time}</span>
         </div>
       </div>
@@ -441,16 +467,14 @@
         </div>
 
         <div class="mockup-main-view">
-          <div class="m-panel">
+          <div class="m-panel table-panel">
             <div class="m-panel-header">
               <span class="m-panel-title">${data.tableTitle}</span>
               <span class="m-panel-tag">Live Stream</span>
             </div>
-            <div class="m-table-container">
-              <div class="mobile-table-hint">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
-                <span>Swipe left/right to view all 5 metrics</span>
-              </div>
+            
+            <!-- Desktop/Tablet Wide Table -->
+            <div class="desktop-table-view">
               <table class="m-table">
                 <thead>
                   <tr>
@@ -462,9 +486,14 @@
                 </tbody>
               </table>
             </div>
+
+            <!-- Mobile Zero-Cropping Native Card List -->
+            <div class="mobile-records-view">
+              ${mobileCardsHtml}
+            </div>
           </div>
 
-          <div class="m-panel">
+          <div class="m-panel ai-panel">
             <div class="m-panel-header">
               <span class="m-panel-title">${data.aiHeading}</span>
               <span class="live-indicator"></span>
