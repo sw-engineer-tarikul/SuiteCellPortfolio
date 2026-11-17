@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuiteCell — The Unified Enterprise Business Operating System | Coming Soon</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="SuiteCell unifies CRM, ERP, HR, Finance, Supply Chain, and AI Automations into one cohesive enterprise operating system. Stop tool fragmentation. Join the private beta.">
+  <meta name="keywords" content="SuiteCell, business software, enterprise ERP, all-in-one CRM, financial management, business operating system, AI business tools, enterprise automation">
+  <meta property="og:title" content="SuiteCell — The Unified Enterprise Business OS">
+  <meta property="og:description" content="All your business operations in one intelligent cell. Eliminate 10+ disconnected SaaS subscriptions. Join the early access queue.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SuiteCell — Complete Business Solution Software">
+  <meta name="twitter:description" content="The next generation business operating system. Private Beta opening soon.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><polygon points='12 2 2 8.5 2 15.5 12 22 22 15.5 22 8.5 12 2'/><circle cx='12' cy='12' r='4' fill='%2338bdf8'/></svg>">
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Background & Dynamic Canvas -->
+  <div class="bg-fx" aria-hidden="true">
+    <div class="glow-orb orb-primary"></div>
+    <div class="glow-orb orb-secondary"></div>
+    <div class="glow-orb orb-tertiary"></div>
+    <div class="grid-mesh"></div>
+    <canvas id="ambient-canvas"></canvas>
+  </div>
+
+  <!-- Announcement Bar -->
+  <aside class="top-banner" role="complementary" aria-label="Announcement">
+    <div class="container banner-inner">
+      <span class="badge pulse-badge">
+        <span class="pulse-dot"></span> Private Beta Q4 2026
+      </span>
+      <p class="banner-text">
+        Over <strong>14,800+</strong> business leaders have reserved early access. Priority onboarding closes in <span id="banner-days-left">14</span> days.
+      </p>
+      <a href="#waitlist-section" class="banner-link">Claim Priority Access &rarr;</a>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="top-nav">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="SuiteCell Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2L3 9.5V22.5L16 30L29 22.5V9.5L16 2Z" stroke="url(#logo-grad-1)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M16 8L8 12.6V20.4L16 25L24 20.4V12.6L16 8Z" fill="url(#logo-grad-2)" opacity="0.3"/>
+            <circle cx="16" cy="16.5" r="3.5" fill="url(#logo-grad-3)"/>
+            <defs>
+              <linearGradient id="logo-grad-1" x1="3" y1="2" x2="29" y2="30" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366F1"/>
+                <stop offset="0.5" stop-color="#38BDF8"/>
+                <stop offset="1" stop-color="#10B981"/>
+              </linearGradient>
+              <linearGradient id="logo-grad-2" x1="8" y1="8" x2="24" y2="25" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366F1"/>
+                <stop offset="1" stop-color="#8B5CF6"/>
+              </linearGradient>
+              <linearGradient id="logo-grad-3" x1="12.5" y1="13" x2="19.5" y2="20" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38BDF8"/>
+                <stop offset="1" stop-color="#6366F1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Suite<span class="text-gradient">Cell</span></span>
+          <span class="brand-tag">Enterprise OS</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#modules" class="nav-item">Platform Cells</a>
+        <a href="#architecture" class="nav-item">Architecture</a>
+        <a href="#calculator" class="nav-item">ROI Calculator</a>
+        <a href="#roadmap" class="nav-item">Roadmap</a>
+        <a href="#faq" class="nav-item">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme (Press T)">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="#waitlist-section" class="btn btn-outline btn-sm">VIP Access</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        
+        <!-- Live Ticker Badge -->
+        <div class="hero-chip" data-aos="fade-down">
+          <span class="chip-status"></span>
+          <span class="chip-text">Next-Generation Unified Business OS</span>
+          <span class="chip-divider">•</span>
+          <span class="chip-accent">Zero Tool Sprawl</span>
+        </div>
+
+        <h1 class="hero-title" data-aos="fade-up">
+          All Your Business Operations.<br>
+          <span class="text-gradient highlight-text">One Intelligent Cell.</span>
+        </h1>
+
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+          SuiteCell replaces your fragmented patchwork of CRM, ERP, HRM, Finance, and Supply Chain tools with a single unified, AI-native operating system designed for modern hyper-growth enterprises.
+        </p>
+
+        <!-- COUNTDOWN TIMER -->
+        <div class="countdown-card" data-aos="fade-up" data-aos-delay="150" aria-label="Official Launch Countdown">
+          <div class="countdown-header">
+            <span class="countdown-label">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              Private Beta Launch Countdown
+            </span>
+            <span class="countdown-target">Target: November 2026</span>
+          </div>
+          
+          <div class="timer-grid" id="countdown-timer">
+            <div class="timer-unit">
+              <div class="digit-box"><span id="days">28</span></div>
+              <span class="unit-name">Days</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-unit">
+              <div class="digit-box"><span id="hours">14</span></div>
+              <span class="unit-name">Hours</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-unit">
+              <div class="digit-box"><span id="minutes">42</span></div>
+              <span class="unit-name">Minutes</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-unit">
+              <div class="digit-box"><span id="seconds">18</span></div>
+              <span class="unit-name">Seconds</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WAITLIST SIGNUP COMPONENT -->
+        <div class="waitlist-wrapper" id="waitlist-section" data-aos="fade-up" data-aos-delay="200">
+          <form id="waitlist-form" class="waitlist-form" novalidate>
+            <div class="input-cluster">
+              <div class="input-field-group">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <input 
+                  type="email" 
+                  id="user-email" 
+                  name="email" 
+                  placeholder="Enter your work email address..." 
+                  required 
+                  autocomplete="email"
+                  aria-label="Work email address"
+                >
+              </div>
+
+              <div class="select-field-group">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <select id="company-size" name="company_size" aria-label="Company Size">
+                  <option value="" disabled selected>Company Size</option>
+                  <option value="1-20">1 - 20 employees (Startup)</option>
+                  <option value="21-100">21 - 100 employees (Growth)</option>
+                  <option value="101-500">101 - 500 employees (Scaleup)</option>
+                  <option value="500+">500+ employees (Enterprise)</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
+                <span class="btn-text">Request Early Access</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+                <span class="btn-loader" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="form-feedback" id="form-feedback" role="alert" aria-live="polite"></div>
+          </form>
+
+          <!-- Success Modal / Card State (Toggled dynamically) -->
+          <div id="waitlist-success" class="waitlist-success hidden" role="region" aria-label="Waitlist Confirmation">
+            <div class="success-icon-wrap">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#10b981" stroke-width="2.5">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="success-content">
+              <h3>You're On The VIP Priority Roster!</h3>
+              <p>We've reserved spot <span class="badge-spot" id="user-spot-number">#1,489</span> for <strong id="confirmed-email">you</strong>.</p>
+              
+              <div class="referral-box">
+                <span class="referral-label">Move up 100 spots for each colleague you invite:</span>
+                <div class="referral-input-row">
+                  <input type="text" id="referral-link" readonly value="https://suitecell.io/vip?ref=SC-8921">
+                  <button id="copy-ref-btn" class="btn btn-outline btn-sm">Copy Link</button>
+                </div>
+                <span id="copy-feedback" class="copy-note"></span>
+              </div>
+              <div class="success-footer-action" style="margin-top: 14px; display: flex; justify-content: flex-end;">
+                <button type="button" id="reset-form-btn" style="font-size: 0.8rem; color: var(--text-subtle); text-decoration: underline; background: none; border: none; cursor: pointer; padding: 4px;">
+                  &larr; Submit another request
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Micro-Trust & Social Proof Badges -->
+          <div class="trust-bar">
+            <div class="avatars-cluster">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Executive User" class="avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="Executive User" class="avatar">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Executive User" class="avatar">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" alt="Executive User" class="avatar">
+              <div class="avatar avatar-more">+14k</div>
+            </div>
+            <div class="trust-rating">
+              <div class="stars">★★★★★</div>
+              <span class="trust-text"><strong>4.9/5</strong> rating from 240+ Alpha design partners</span>
+            </div>
+            <div class="trust-badges-inline">
+              <span class="security-tag"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> SOC2 Type II Certified</span>
+              <span class="security-tag"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 256-bit AES Encryption</span>
+              <span class="security-tag"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> GDPR & HIPAA Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENT LIVE JOIN TICKER -->
+        <div class="live-activity" id="live-activity" aria-live="polite">
+          <span class="activity-pulse"></span>
+          <span class="activity-text" id="activity-msg"><strong>Elena R.</strong> (COO at Apex Logistics, 180 seats) joined the priority queue 3 minutes ago</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PRODUCT SHOWCASE & PLATFORM MODULES -->
+    <section class="section modules-section" id="modules">
+      <div class="container">
+        
+        <div class="section-head text-center">
+          <span class="sub-badge">Modular Cellular Architecture</span>
+          <h2 class="section-title">Six Powerful Engines. One Cohesive Core.</h2>
+          <p class="section-desc">
+            No more CSV exports, fragile Zapier zaps, or siloed spreadsheets. Every SuiteCell module communicates in real-time on our unified distributed data ledger.
+          </p>
+        </div>
+
+        <!-- Module Selector Tabs -->
+        <div class="module-tabs" role="tablist" aria-label="Platform Cells">
+          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-flow" id="tab-flow" data-module="flow">
+            <span class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <div class="tab-text">
+              <span class="tab-title">Cell Flow</span>
+              <span class="tab-sub">CRM & Pipeline</span>
+            </div>
+          </button>
+
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-books" id="tab-books" data-module="books">
+            <span class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </span>
+            <div class="tab-text">
+              <span class="tab-title">Cell Books</span>
+              <span class="tab-sub">Finance & Billing</span>
+            </div>
+          </button>
+
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-team" id="tab-team" data-module="team">
+            <span class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <div class="tab-text">
+              <span class="tab-title">Cell Team</span>
+              <span class="tab-sub">HRM & Payroll</span>
+            </div>
+          </button>
+
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-ops" id="tab-ops" data-module="ops">
+            <span class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </span>
+            <div class="tab-text">
+              <span class="tab-title">Cell Ops</span>
+              <span class="tab-sub">Supply & Stock</span>
+            </div>
+          </button>
+
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-ai" id="tab-ai" data-module="ai">
+            <span class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <div class="tab-text">
+              <span class="tab-title">Cell Brain</span>
+              <span class="tab-sub">Autonomous AI</span>
+            </div>
+          </button>
+
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-collab" id="tab-collab" data-module="collab">
+            <span class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <div class="tab-text">
+              <span class="tab-title">Cell Sync</span>
+              <span class="tab-sub">Workspace Chat</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Interactive Preview Window (Mockup Screen) -->
+        <div class="preview-wrapper">
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="window-controls">
+                <span class="w-dot red"></span>
+                <span class="w-dot yellow"></span>
+                <span class="w-dot green"></span>
+              </div>
+              <div class="window-address">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>app.suitecell.io/workspace/enterprise-hq</span>
+              </div>
+              <div class="window-status">
+                <span class="live-indicator"></span> 99.999% Live Mesh
+              </div>
+            </div>
+
+            <!-- Dynamic Interactive Panel -->
+            <div class="mockup-body" id="mockup-content">
+              <!-- Content replaced dynamically by script.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE & CONSOLIDATION: BEFORE vs AFTER -->
+    <section class="section comparison-section" id="architecture">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="sub-badge">The Paradigm Shift</span>
+          <h2 class="section-title">The Death of Software Fragmentation</h2>
+          <p class="section-desc">
+            The average 100-person company pays for 14 disconnected tools, loses 9.4 hours per employee each week in context switching, and leaks \$180,000 annually in unused licenses.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <!-- The Old Broken Way -->
+          <div class="compare-card compare-old">
+            <div class="card-badge badge-danger">The Fragmented Legacy Stack</div>
+            <h3 class="compare-headline">12+ Subscriptions & Endless Integrations</h3>
+            
+            <ul class="compare-list">
+              <li>
+                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <div>
+                  <strong>Siloed Databases:</strong> Sales data doesn't talk to accounting; inventory counts lag days behind customer orders.
+                </div>
+              </li>
+              <li>
+                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <div>
+                  <strong>Massive SaaS Tax:</strong> Paying \$150/user for CRM + \$90/user for ERP + \$40/user for HR + \$25/user for Project tools.
+                </div>
+              </li>
+              <li>
+                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <div>
+                  <strong>Fragile Webhooks:</strong> Engineers spend 30% of their sprints fixing broken API syncs and manual CSV imports.
+                </div>
+              </li>
+              <li>
+                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <div>
+                  <strong>Superficial AI Add-ons:</strong> Generic chatbots tacked onto 20-year-old legacy software without contextual knowledge.
+                </div>
+              </li>
+            </ul>
+
+            <div class="stat-highlight red-tint">
+              <span class="stat-num">\$3,600+</span>
+              <span class="stat-label">Avg annual cost per seat across traditional stack</span>
+            </div>
+          </div>
+
+          <!-- The SuiteCell Way -->
+          <div class="compare-card compare-new highlight-border">
+            <div class="card-badge badge-success">The SuiteCell Ecosystem</div>
+            <h3 class="compare-headline">One Unified Cellular Operating System</h3>
+            
+            <ul class="compare-list">
+              <li>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div>
+                  <strong>Instant Global Ledger:</strong> When an invoice is paid in Cell Books, inventory updates in Cell Ops, and sales commission calculates in Cell Team in 4ms.
+                </div>
+              </li>
+              <li>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div>
+                  <strong>Single Predictable Pricing:</strong> One transparent seat cost covers your entire operational suite with zero surprise add-on fees.
+                </div>
+              </li>
+              <li>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div>
+                  <strong>Zero Integration Overhead:</strong> Every cell is natively interconnected out of the box with atomic consistency.
+                </div>
+              </li>
+              <li>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div>
+                  <strong>Autonomous AI Agents:</strong> Cell Brain proactively reconciles books, predicts stock shortages, and drafts executive briefings.
+                </div>
+              </li>
+            </ul>
+
+            <div class="stat-highlight green-tint">
+              <span class="stat-num">65%</span>
+              <span class="stat-label">Reduction in total software spend + 8x faster team velocity</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE ROI / COST SAVINGS CALCULATOR -->
+    <section class="section calculator-section" id="calculator">
+      <div class="container">
+        
+        <div class="calc-card">
+          <div class="calc-header">
+            <span class="sub-badge">Interactive Savings Estimator</span>
+            <h2 class="section-title">Calculate Your Company's Annual Savings</h2>
+            <p class="section-desc">
+              Slide to match your organization's current headcount and SaaS footprint to see the bottom-line financial and operational impact of switching to SuiteCell.
+            </p>
+          </div>
+
+          <div class="calc-body">
+            <!-- Left Controls -->
+            <div class="calc-controls">
+              
+              <div class="control-group">
+                <div class="slider-meta">
+                  <label for="headcount-slider">Current Team Size (Employees):</label>
+                  <span class="slider-val" id="headcount-val">65 Team Members</span>
+                </div>
+                <input 
+                  type="range" 
+                  id="headcount-slider" 
+                  min="5" 
+                  max="500" 
+                  value="65" 
+                  step="5"
+                  class="custom-range"
+                >
+                <div class="range-ticks">
+                  <span>5 (Startup)</span>
+                  <span>100</span>
+                  <span>250</span>
+                  <span>500+ (Enterprise)</span>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="slider-meta">
+                  <label for="tools-slider">Disconnected SaaS Tools Currently in Use:</label>
+                  <span class="slider-val" id="tools-val">8 Separate Tools</span>
+                </div>
+                <input 
+                  type="range" 
+                  id="tools-slider" 
+                  min="3" 
+                  max="20" 
+                  value="8" 
+                  step="1"
+                  class="custom-range"
+                >
+                <div class="range-ticks">
+                  <span>3 tools</span>
+                  <span>8 tools</span>
+                  <span>14 tools</span>
+                  <span>20+ tools</span>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label>Primary Industry Sector:</label>
+                <div class="industry-selector" id="industry-selector">
+                  <button type="button" class="industry-btn active" data-factor="1.0">Tech & Software</button>
+                  <button type="button" class="industry-btn" data-factor="1.2">Logistics & Supply</button>
+                  <button type="button" class="industry-btn" data-factor="1.15">Finance & Fintech</button>
+                  <button type="button" class="industry-btn" data-factor="0.95">Retail & E-commerce</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Results Display -->
+            <div class="calc-results">
+              <div class="result-tile primary-result">
+                <span class="result-tag">Estimated Annual Savings</span>
+                <div class="savings-amount">
+                  <span class="currency">$</span>
+                  <span id="calculated-savings" class="odometer">98,280</span>
+                </div>
+                <span class="result-sub">Direct subscription & integration license savings</span>
+              </div>
+
+              <div class="results-subgrid">
+                <div class="result-tile">
+                  <span class="result-tag">Engineering Hours Reclaimed</span>
+                  <div class="mini-metric"><span id="hours-saved">3,120</span> hrs/yr</div>
+                  <span class="mini-note">Eliminating custom glue-code & sync fixes</span>
+                </div>
+
+                <div class="result-tile">
+                  <span class="result-tag">Operational Velocity</span>
+                  <div class="mini-metric"><span id="speed-gain">4.2</span>x Faster</div>
+                  <span class="mini-note">Across billing, hiring & inventory cycles</span>
+                </div>
+              </div>
+
+              <div class="calc-cta">
+                <a href="#waitlist-section" class="btn btn-primary btn-block">Lock In Beta Founder Pricing</a>
+                <span class="guarantee-text">⚡ Beta members receive guaranteed 50% discount for life.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- KEY VALUE PILLARS & FEATURES -->
+    <section class="section pillars-section">
+      <div class="container">
+        
+        <div class="section-head text-center">
+          <span class="sub-badge">Engineered For Scale</span>
+          <h2 class="section-title">Built Ground-Up for Extreme Performance</h2>
+          <p class="section-desc">
+            We didn't just bundle existing software. We built an atomic multi-tenant kernel that synchronizes your entire company in sub-milliseconds.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>Atomic Data Mesh</h3>
+            <p>Every department accesses one authoritative source of truth. Schema changes and record updates propagate globally in under 15ms.</p>
+            <div class="pillar-stat">15ms global latency</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Autonomous AI Copilots</h3>
+            <p>Built-in AI agents that don't just answer questions—they execute actions. From matching bank payments to forecasting supply chain disruptions.</p>
+            <div class="pillar-stat">85% automation rate</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Military-Grade Governance</h3>
+            <p>Role-based cell isolation, granular audit logging, field-level encryption, SOC2 Type II, and data residency in US, EU, and APAC zones.</p>
+            <div class="pillar-stat">Zero-trust architecture</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <h3>Executive Command Center</h3>
+            <p>Real-time cross-company telemetry. Watch revenue, runway, pipeline, hiring pace, and customer satisfaction converge into one live dashboard.</p>
+            <div class="pillar-stat">Instant 360° visibility</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>1-Click Data Migration</h3>
+            <p>Moving from Salesforce, NetSuite, QuickBooks, or HubSpot? Our automated ETL pipelines ingest and map your historical data in minutes.</p>
+            <div class="pillar-stat">Zero downtime switch</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+            </div>
+            <h3>Open API & Webhooks</h3>
+            <p>Full GraphQL and REST APIs with comprehensive webhooks. Extend any cell or trigger custom microservices effortlessly.</p>
+            <div class="pillar-stat">10,000+ req/sec throughput</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ROADMAP / LAUNCH TIMELINE -->
+    <section class="section roadmap-section" id="roadmap">
+      <div class="container">
+        
+        <div class="section-head text-center">
+          <span class="sub-badge">Development Milestones</span>
+          <h2 class="section-title">The Path to General Availability</h2>
+          <p class="section-desc">
+            We are building SuiteCell in direct partnership with leading enterprise design partners across fintech, manufacturing, and commerce.
+          </p>
+        </div>
+
+        <div class="timeline">
+          
+          <div class="timeline-step completed">
+            <div class="step-indicator">
+              <span class="step-dot"></span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-card">
+              <div class="step-meta">
+                <span class="step-badge badge-done">Completed</span>
+                <span class="step-date">Q1 - Q2 2026</span>
+              </div>
+              <h3 class="step-title">Core Engine & Architecture</h3>
+              <p>Designed the atomic data mesh, multi-tenant permission hierarchy, and sub-millisecond sync protocol. Validated with 25 initial pilot teams.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step current">
+            <div class="step-indicator">
+              <span class="step-dot active-dot"></span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-card highlight-card">
+              <div class="step-meta">
+                <span class="step-badge badge-active">Current Stage</span>
+                <span class="step-date">Q3 - Q4 2026</span>
+              </div>
+              <h3 class="step-title">Closed Beta & Design Partners</h3>
+              <p>Onboarding the first 250 enterprise cohorts. Rolling out Cell Flow, Cell Books, and autonomous agent workflows. Preparing SOC2 Type II audit.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step upcoming">
+            <div class="step-indicator">
+              <span class="step-dot"></span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-card">
+              <div class="step-meta">
+                <span class="step-badge badge-pending">Upcoming</span>
+                <span class="step-date">Q1 2027</span>
+              </div>
+              <h3 class="step-title">Public Beta & Marketplace</h3>
+              <p>Opening public access for waitlist tiers. Launching the SuiteCell App Marketplace for 3rd-party cell extensions, plugins, and custom integrations.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step upcoming">
+            <div class="step-indicator">
+              <span class="step-dot"></span>
+            </div>
+            <div class="step-card">
+              <div class="step-meta">
+                <span class="step-badge badge-pending">Vision</span>
+                <span class="step-date">Q2 2027</span>
+              </div>
+              <h3 class="step-title">General Availability & Global Cloud</h3>
+              <p>Full global availability with localized data residency across Europe, Asia-Pacific, North America, and sovereign government cloud tiers.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EARLY ADOPTER VIP PERKS -->
+    <section class="section perks-section">
+      <div class="container">
+        
+        <div class="perks-banner">
+          <div class="perks-content">
+            <span class="sub-badge">Early Supporter Privileges</span>
+            <h2>Exclusive Perks for Waitlist Members</h2>
+            <p>Join the private beta queue today to lock in permanent early-adopter benefits that will never be offered again after general public launch.</p>
+            
+            <div class="perks-grid">
+              <div class="perk-item">
+                <div class="perk-check">✓</div>
+                <div>
+                  <strong>50% Lifetime Discount:</strong> Lock in our introductory rates for the lifetime of your organization.
+                </div>
+              </div>
+              <div class="perk-item">
+                <div class="perk-check">✓</div>
+                <div>
+                  <strong>White-Glove Migration:</strong> Dedicated engineers manage your data import from legacy ERPs at zero charge.
+                </div>
+              </div>
+              <div class="perk-item">
+                <div class="perk-check">✓</div>
+                <div>
+                  <strong>Product Council Seat:</strong> Direct monthly input on upcoming cell roadmap and requested custom features.
+                </div>
+              </div>
+              <div class="perk-item">
+                <div class="perk-check">✓</div>
+                <div>
+                  <strong>1-on-1 Dedicated TAM:</strong> Technical Account Manager and 24/7 priority enterprise support SLA.
+                </div>
+              </div>
+            </div>
+
+            <div class="perk-action">
+              <a href="#waitlist-section" class="btn btn-primary btn-lg">Secure Your Founder Benefits &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS -->
+    <section class="section faq-section" id="faq">
+      <div class="container">
+        
+        <div class="section-head text-center">
+          <span class="sub-badge">Got Questions?</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">
+            Everything you need to know about the SuiteCell platform, architecture, and private beta rollout.
+          </p>
+        </div>
+
+        <div class="faq-accordion" id="faq-accordion">
+          
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-1" id="faq-q-1">
+              <span>What exactly is SuiteCell and how is it different from traditional ERPs?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faq-ans-1" role="region" aria-labelledby="faq-q-1" hidden>
+              <p>Traditional ERPs (like SAP or NetSuite) were designed in the 1990s as monolithic, slow relational databases requiring 12-month consultant rollouts. SuiteCell is built on a modern cellular micro-ledger: each functional area (CRM, Finance, HR, Inventory) functions as an autonomous yet instantly synchronized cell. You get modern UI, instant setup, built-in AI agents, and sub-second performance without hiring an army of consultants.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2" id="faq-q-2">
+              <span>Can we adopt SuiteCell module by module, or do we have to switch everything at once?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faq-ans-2" role="region" aria-labelledby="faq-q-2" hidden>
+              <p>You can start modularly! Many early adopters start with <strong>Cell Flow (CRM)</strong> or <strong>Cell Books (Finance)</strong> while keeping their existing systems, using our live bi-directional connectors. Once your team experiences the unified experience, you can toggle on remaining cells with zero downtime.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3" id="faq-q-3">
+              <span>When does early access roll out and how are invites prioritized?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faq-ans-3" role="region" aria-labelledby="faq-q-3" hidden>
+              <p>Invites are released in weekly batches starting Q4 2026. Queue position is based on signup order, team size alignment with active beta tracks, and referrals. Sharing your unique referral link after joining moves you up 100 spots per signup.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-4" id="faq-q-4">
+              <span>How does SuiteCell protect enterprise data and ensure compliance?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faq-ans-4" role="region" aria-labelledby="faq-q-4" hidden>
+              <p>Security is baked into our foundation. SuiteCell features customer-managed encryption keys (CMEK), end-to-end 256-bit AES encryption in transit and at rest, SOC2 Type II certification, GDPR/CCPA compliance, and dedicated regional data residency zones. We never use your company data to train public foundation models.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-5" id="faq-q-5">
+              <span>What is the pricing model going to look like?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faq-ans-5" role="region" aria-labelledby="faq-q-5" hidden>
+              <p>We believe in transparent, per-user pricing with all core cells included. No hidden maintenance charges, API rate-limit penalties, or extortionate user tiers. Early access members who join the waitlist receive an exclusive 50% lifetime discount applied to whichever plan they choose.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CALL TO ACTION -->
+    <section class="section final-cta-section">
+      <div class="container text-center">
+        <div class="final-cta-card">
+          <div class="cta-glow"></div>
+          <span class="sub-badge">Ready For The Future?</span>
+          <h2 class="cta-heading">Join The Business Operating Revolution</h2>
+          <p class="cta-sub">
+            Say goodbye to fragmented SaaS debt. Experience what happens when your sales, operations, finance, and people work together as one cohesive organism.
+          </p>
+
+          <div class="cta-form-container">
+            <a href="#waitlist-section" class="btn btn-primary btn-lg cta-scroll-btn">
+              <span>Get Early Access Now</span>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+
+          <div class="cta-footer-meta">
+            <span>✓ No credit card required</span>
+            <span>✓ Instant queue confirmation</span>
+            <span>✓ Cancel anytime</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      
+      <div class="footer-col brand-col">
+        <div class="brand-logo">
+          <div class="logo-icon small">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2L3 9.5V22.5L16 30L29 22.5V9.5L16 2Z" stroke="#6366F1" stroke-width="2.5" stroke-linejoin="round"/>
+              <circle cx="16" cy="16.5" r="3.5" fill="#38BDF8"/>
+            </svg>
+          </div>
+          <span class="brand-name">Suite<span class="text-gradient">Cell</span></span>
+        </div>
+        <p class="footer-desc">
+          The next-generation enterprise business operating system. Unifying sales, finance, operations, and talent into one atomic platform.
+        </p>
+        <div class="footer-socials">
+          <a href="#" aria-label="X / Twitter" class="social-link">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="social-link">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8m1.4 9.74v-8.37H5.06v8.37h2.8z"/></svg>
+          </a>
+          <a href="#" aria-label="GitHub" class="social-link">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Platform Cells</h4>
+        <ul class="footer-links">
+          <li><a href="#modules">Cell Flow (CRM)</a></li>
+          <li><a href="#modules">Cell Books (Finance)</a></li>
+          <li><a href="#modules">Cell Team (HRM)</a></li>
+          <li><a href="#modules">Cell Ops (Supply)</a></li>
+          <li><a href="#modules">Cell Brain (AI Engine)</a></li>
+          <li><a href="#modules">Cell Sync (Comms)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#calculator">ROI Calculator</a></li>
+          <li><a href="#architecture">Architecture Whitepaper</a></li>
+          <li><a href="#roadmap">Product Roadmap</a></li>
+          <li><a href="#faq">Enterprise FAQ</a></li>
+          <li><a href="#">Security & Compliance</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Status & Legal</h4>
+        <div class="status-indicator-box">
+          <span class="status-dot green"></span>
+          <span>Core API Beta: Operational</span>
+        </div>
+        <p class="footer-fineprint">
+          &copy; <span id="year-copy">2026</span> SuiteCell Technologies Inc. All rights reserved.
+        </p>
+        <div class="legal-links">
+          <a href="#">Privacy Policy</a>
+          <span>•</span>
+          <a href="#">Terms of Service</a>
+          <span>•</span>
+          <a href="#">Security Trust Center</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Notification / Quick Alert Popup -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Confetti Canvas for Waitlist Celebration -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
