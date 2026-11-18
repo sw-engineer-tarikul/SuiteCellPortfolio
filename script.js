@@ -164,7 +164,7 @@
         // Generate unique spot
         const randomSpot = Math.floor(1420 + Math.random() * 85);
         const refCode = 'SC-' + Math.floor(1000 + Math.random() * 9000);
-        const refUrl = `https://suitecell.io/vip?ref=${refCode}`;
+        const refUrl = `https://suitecell.com/vip?ref=${refCode}`;
 
         const userData = {
           email: email,
